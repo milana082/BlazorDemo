@@ -1,0 +1,82 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\net6.0\CrudOperations.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net6.0\CrudOperations.GlobalUsings.g.cs" />
+    <Compile Include="obj\Debug\net6.0\CrudOperations.MvcApplicationPartsAssemblyInfo.cs" />
+    <Compile Include="obj\Release\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Release\net6.0\CrudOperations.AssemblyInfo.cs" />
+    <Compile Include="obj\Release\net6.0\CrudOperations.GlobalUsings.g.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net6.0\appsettings.Development.json" />
+    <Content Include="bin\Debug\net6.0\appsettings.json" />
+    <Content Include="bin\Debug\net6.0\CrudOperations.deps.json" />
+    <Content Include="bin\Debug\net6.0\CrudOperations.runtimeconfig.json" />
+    <Content Include="obj\CrudOperations.csproj.nuget.dgspec.json" />
+    <Content Include="obj\Debug\net6.0\CrudOperations.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\net6.0\staticwebassets.build.json" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IgniteUI.Blazor.Trial" Version="22.2.65" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Release\net6.0\" />
+    <Folder Include="obj\Release\net6.0\refint\" />
+    <Folder Include="obj\Release\net6.0\ref\" />
+    <Folder Include="obj\Release\net6.0\staticwebassets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net6.0\CrudOperations.dll" />
+    <None Include="bin\Debug\net6.0\CrudOperations.exe" />
+    <None Include="bin\Debug\net6.0\CrudOperations.pdb" />
+    <None Include="bin\Debug\net6.0\Microsoft.OpenApi.dll" />
+    <None Include="bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll" />
+    <None Include="bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll" />
+    <None Include="bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll" />
+    <None Include="obj\CrudOperations.csproj.nuget.g.props" />
+    <None Include="obj\CrudOperations.csproj.nuget.g.targets" />
+    <None Include="obj\Debug\net6.0\apphost.exe" />
+    <None Include="obj\Debug\net6.0\CrudOperations.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net6.0\CrudOperations.assets.cache" />
+    <None Include="obj\Debug\net6.0\CrudOperations.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\net6.0\CrudOperations.csproj.BuildWithSkipAnalyzers" />
+    <None Include="obj\Debug\net6.0\CrudOperations.csproj.CopyComplete" />
+    <None Include="obj\Debug\net6.0\CrudOperations.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\net6.0\CrudOperations.dll" />
+    <None Include="obj\Debug\net6.0\CrudOperations.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net6.0\CrudOperations.genruntimeconfig.cache" />
+    <None Include="obj\Debug\net6.0\CrudOperations.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="obj\Debug\net6.0\CrudOperations.pdb" />
+    <None Include="obj\Debug\net6.0\refint\CrudOperations.dll" />
+    <None Include="obj\Debug\net6.0\ref\CrudOperations.dll" />
+    <None Include="obj\Debug\net6.0\staticwebassets\msbuild.build.CrudOperations.props" />
+    <None Include="obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.CrudOperations.props" />
+    <None Include="obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.CrudOperations.props" />
+    <None Include="obj\project.nuget.cache" />
+    <None Include="obj\Release\net6.0\CrudOperations.AssemblyInfoInputs.cache" />
+    <None Include="obj\Release\net6.0\CrudOperations.assets.cache" />
+    <None Include="obj\Release\net6.0\CrudOperations.csproj.AssemblyReference.cache" />
+    <None Include="obj\Release\net6.0\CrudOperations.GeneratedMSBuildEditorConfig.editorconfig" />
+  </ItemGroup>
+
+</Project>

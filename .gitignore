@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/CrudOperations(P)/.vs
+/CrudOperations(P)/BlazorApp1/bin/Debug/net6.0
+/CrudOperations(P)/BlazorApp1/obj
+/CrudOperations(P)/CrudOperations/bin/Debug/net6.0
+/CrudOperations(P)/CrudOperations/obj

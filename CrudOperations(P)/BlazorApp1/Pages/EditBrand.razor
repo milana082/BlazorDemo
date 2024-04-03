@@ -1,0 +1,84 @@
+﻿@page "/EditBrand/{ID:int}"
+@using BlazorApp1.Services;
+@using CrudOperations.Models;
+@inject IBrandServices _brandServices;
+@inject HttpClient Http
+@inject Microsoft.AspNetCore.Components.NavigationManager navigation
+
+<PageTitle>EditBrand</PageTitle>
+
+
+<h3>EditBrand</h3>
+
+<h5>ID @ID</h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @if (brand1 != null)
+        {
+            <EditForm Model="@brand1" OnValidSubmit="@UpdateData">
+                <div class="form-group">
+                    <label for="ID" class="control-label">ID</label>
+                    <InputNumber for="ID" @bind-Value="@ID" type="number" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Name</label>
+                    <InputText for="Name" @bind-Value="@brand1.Name" class="form-control" />
+                    <ValidationMessage For="() => brand1.Name" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Category" class="control-label">Category</label>
+                    <InputText asp-for="Category" class="form-control" @bind-Value="@brand1.Category" />
+                    <ValidationMessage For="() => brand1.Category" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="IsActive" class="control-label">IsActive</label>
+                    <InputNumber asp-for="IsActive" type="number" class="form-control" @bind-Value="@brand1.IsActive"/>
+                    <ValidationMessage For="() => brand1.IsActive" />
+                </div>
+                <div class="form-group">
+                    <label for="LastUpdated">Last Updated</label>
+                    <InputDate id="LastUpdated" class="form-control" @bind-Value="brand1.LastUpdated" />
+                    <ValidationMessage For="@(() => brand1.LastUpdated)" />
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-default" @onclick="@(async () => await UpdateData())">Save</button>
+                    <button type="button" @onclick="@cancel" class="btn">Cancel</button>
+                </div>
+            </EditForm>
+        }
+    </div>
+</div>
+
+@code {
+
+    //Brand brand = new Brand();
+
+    [Parameter]
+    public int ID { get; set; }
+
+    private Brand brand1 = new Brand();
+
+    protected override async Task OnInitializedAsync()
+    {
+        brand1 = await _brandServices.GetBrand(ID);
+    }
+
+    public async Task UpdateData()
+    {
+        await PutBrand(ID, brand1);
+    }
+
+    private async Task PutBrand(int id, Brand brand)
+    {
+        await _brandServices.PutBrand(id, brand);
+        this.StateHasChanged();
+        navigation.NavigateTo("/");    
+    }
+    void cancel()
+    {
+        navigation.NavigateTo("/");
+    }
+}
+
+

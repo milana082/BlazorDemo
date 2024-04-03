@@ -1,0 +1,63 @@
+﻿@page "/AddBrand"
+@using BlazorApp1.Services;
+@using CrudOperations.Models;
+@inject IBrandServices _brandServices;
+@inject HttpClient Http
+@inject Microsoft.AspNetCore.Components.NavigationManager navigation
+
+
+<PageTitle>AddBrand</PageTitle>
+
+<h3>AddBrand</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form OnValidSubmit="@sendData">
+            <div class="form-group" hidden>
+                <label for="Name" class="control-label">ID</label>
+                <input for="Name" class="form-control" @bind-value="brand1.ID" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Designation" class="control-label">Name</label>
+                <input for="Designation" class="form-control" @bind-value="brand1.Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Category</label>
+                <input asp-for="Email" @bind-value="brand1.Category" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label">IsActive</label>
+                <input asp-for="Location" @bind-value="brand1.IsActive" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label">LastUpdated</label>
+                <input asp-for="Location" @bind-value="brand1.LastUpdated" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button type="button" @onclick="@(async () => await sendData())" class="btn btn-default">Save</button>
+                <button type="button" class="btn" @onclick="@cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@code {
+    private Brand brand1 = new Brand();
+
+
+    public async Task sendData()
+    {
+        await PostBrand(brand1);
+    }
+    private async Task PostBrand(Brand brand)
+    {
+        List<Brand> brand1 = new List<Brand>();
+        await _brandServices.PostBrand(brand);
+        navigation.NavigateTo("/");
+    }
+    void cancel()
+    {
+        navigation.NavigateTo("/");
+    }
+}

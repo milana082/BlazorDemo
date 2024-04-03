@@ -1,0 +1,54 @@
+﻿@*@page "/"
+@using BlazorApp1.Models;
+@layout LoginLayout
+@using BlazorApp1.Services;
+@inject IAdminData _Dbadmin
+@inject NavigationManager nav
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <EditForm Model="@model" OnValidSubmit="Submit">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" @bind-value="model.Email">
+            <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" @bind-value="model.Password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </EditForm>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            @msg
+            <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+
+    </div>
+</div>
+
+@code {
+    AdminModel model = new AdminModel();
+    static List<AdminModel> adminList = new List<AdminModel>();
+    string msg;
+    protected override void OnParametersSet()
+    {
+        adminList = _Dbadmin.LoadData();
+    }
+    private void Submit()
+    {
+        if(adminList.Any(a=>a.Email.Equals(model.Email) && a.Password.Equals(model.Password)))
+        {
+            nav.NavigateTo("/");
+        }
+        else
+        {
+            msg = "your mail and pass are invalid";
+        }
+
+    }
+
+}
+*@

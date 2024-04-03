@@ -1,0 +1,145 @@
+﻿@page "/RestApi"
+@using BlazorApp1.Models;
+@using BlazorApp1.Services;
+@inject INewOpenApiServices _ApiService
+
+<PageTitle>RestApi</PageTitle>
+
+
+<section>
+    <div class="container">
+        <div class="Heading-wrapper" style="display: flex;justify-content: space-between;">
+            <div class="title"><h3>RestApi</h3></div>
+        </div>
+    </div>
+    <hr />
+
+    @if(items == null)
+    {
+        <h4>Loading....</h4>
+    }
+    else
+    {
+        @if (TotalPages() > 1)
+        {
+            <div class="pager-display">
+                @if (CurrentPage == 1)
+                {
+                    <button disabled>&laquo;</button>
+                    <button disabled>&lsaquo;</button>
+                }
+                else
+                {
+                    <button @onclick="@MoveFirst" title="Move First">&laquo;</button>
+                    <button @onclick="@MoveBack" title="Move Back">&lsaquo;</button>
+                }
+                <span style="margin-left:10px;margin-right:10px;">@CurrentPage of @TotalPages() </span>
+                @if (!AtLastPage())
+                {
+                    <button @onclick="@MoveNext" title="Move Next">&rsaquo;</button>
+                    <button @onclick="@MoveLast" title="Move Last">&raquo;</button>
+                }
+                else
+                {
+                    <button disabled>&rsaquo;</button>
+                    <button disabled>&raquo;</button>
+                }
+            </div>
+            <hr />
+        }     
+        <table class="table table-striped table-bordered bg-light">
+                <thead>
+                    <tr>
+                        <th>lccn</th>
+                        <th>url</th>
+                        <th>state</th>
+                        <th>title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in items)
+                    {
+                        <tr>
+                            <td>@item.lccn</td>
+                            <td><a href="@item.url">@item.url</a></td>
+                            <td>@item.state</td>
+                            <td>@item.title</td>
+                        </tr>
+                    }
+                </tbody>
+        </table>
+    }
+</section>
+
+
+@code {
+
+    private List<Item> allItems = new List<Item>();
+
+    private List<Item> items = new List<Item>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetItems();
+    }
+    private async Task GetItems()
+    {
+        allItems = await _ApiService.GetItems();
+    }
+
+    [Parameter]
+    public int ItemsPerPage { get; set; } = 10;
+
+    private int CurrentPage = 1;
+   
+    private int TotalCount;
+
+    protected override void OnParametersSet()
+    {
+        UpdateDisplay();
+        TotalCount = allItems.Count();
+    }
+
+    private void UpdateDisplay()
+    {
+        items = allItems.Skip((CurrentPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList();
+    }
+
+    private bool AtLastPage()
+    {
+        return CurrentPage >= TotalPages();
+    }
+
+    private int TotalPages()
+    {
+        return Convert.ToInt32(Math.Ceiling(TotalCount / Convert.ToDecimal(ItemsPerPage)));
+    }
+
+    private void MoveFirst()
+    {
+        CurrentPage = 1;
+        UpdateDisplay();
+    }
+
+    private void MoveBack()
+    {
+        CurrentPage--;
+        UpdateDisplay();
+    }
+
+    private void MoveNext()
+    {
+        CurrentPage++;
+        UpdateDisplay();
+    }
+
+    private void MoveLast()
+    {
+        CurrentPage = TotalPages();
+        UpdateDisplay();
+    }
+
+}
+
+@*reference for pagination:https://stackoverflow.com/questions/61570342/blazor-component-paging*@
+
